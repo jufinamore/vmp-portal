@@ -126,7 +126,7 @@
     <div class="subtitle">Escolha uma das ferramentas disponíveis na sua assinatura.</div>
 
     <div class="hub-links">
-      <a href="https://video-matrix-pro-br.netlify.app/" class="hub-link primary">
+      <a href="https://video-matrix-pro-br.netlify.app/" class="hub-link primary" id="multLink">
         <span class="icon">🎬</span>
         <span class="info">
           <span class="title">Multiplicador de Vídeos</span>
@@ -135,7 +135,7 @@
         <span class="arrow">→</span>
       </a>
 
-      <a href="https://vmp-camera.netlify.app/" target="_blank" rel="noopener" class="hub-link">
+      <a href="https://vmp-camera.netlify.app/" target="_blank" rel="noopener" class="hub-link" id="camLink">
         <span class="icon">📷</span>
         <span class="info">
           <span class="title">VMP Câmera <span class="badge">BÔNUS</span></span>
@@ -160,7 +160,16 @@
   var gateBtn = document.getElementById("gateBtn");
   var gateErr = document.getElementById("gateErr");
 
+  function setHubLinks(code) {
+    if (!code) return;
+    var m = document.getElementById("multLink");
+    if (m) m.href = "https://video-matrix-pro-br.netlify.app/?code=" + encodeURIComponent(code);
+    var c = document.getElementById("camLink");
+    if (c) c.href = "https://vmp-camera.netlify.app/?code=" + encodeURIComponent(code);
+  }
+
   function showHub() {
+    try { setHubLinks(localStorage.getItem(GATE_CODE_KEY)); } catch (e) {}
     gateEl.classList.add("hidden");
     hubEl.classList.remove("hidden");
   }
